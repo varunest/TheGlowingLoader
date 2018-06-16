@@ -151,8 +151,8 @@ public class GlowingLoader extends View {
         w32.setDuration(tw32);
 
 
-        w22.setStartDelay(tw21);
-        w32.setStartDelay(tw21 + tw22);
+        w22.setStartDelay(tw12);
+        w32.setStartDelay(tw12 + tw22);
 
         w11.start();
         w12.start();

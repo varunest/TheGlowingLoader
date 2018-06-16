@@ -1,18 +1,21 @@
 package com.example.varun.loader;
 
 import android.content.Context;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
 public class GlowingLoader extends View {
-    private Paint rp;
-    private Paint wp;
+    private Paint paint;
     private LineValueAnimator lineAnimator;
-
+    private static final String COLOR_RED = "#FF5C5C";
+    private static final String COLOR_WHITE = "#FFFFFF";
 
     public GlowingLoader(Context context) {
         super(context);
@@ -36,15 +39,11 @@ public class GlowingLoader extends View {
 
     private void init() {
         lineAnimator = new LineValueAnimator(GlowingLoader.this);
-        rp = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rp.setColor(Color.parseColor("#FF5C5C"));
-        rp.setStrokeWidth(25);
-        rp.setStrokeCap(Paint.Cap.ROUND);
-
-        wp = new Paint(Paint.ANTI_ALIAS_FLAG);
-        wp.setColor(Color.WHITE);
-        wp.setStrokeWidth(25);
-        wp.setStrokeCap(Paint.Cap.ROUND);
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+//        paint.setXfermode(new PorterDuffXfermode(
+//                PorterDuff.Mode.SRC_OUT));
+//        paint.setAntiAlias(true);
     }
 
     private void startAnimation() {
@@ -87,13 +86,47 @@ public class GlowingLoader extends View {
 //        canvas.drawLine(x2, y2, x3, y3, wp);
 //        canvas.drawLine(x3, y3, x4, y4, wp);
 
-        canvas.drawLine(lineAnimator.wxa11, lineAnimator.wya11, lineAnimator.wxa12, lineAnimator.wya12, wp);
-        canvas.drawLine(lineAnimator.wxa21, lineAnimator.wya21, lineAnimator.wxa22, lineAnimator.wya22, wp);
-        canvas.drawLine(lineAnimator.wxa31, lineAnimator.wya31, lineAnimator.wxa32, lineAnimator.wya32, wp);
-        canvas.drawLine(lineAnimator.rxa11, lineAnimator.rya11, lineAnimator.rxa12, lineAnimator.rya12, rp);
-        canvas.drawLine(lineAnimator.rxa21, lineAnimator.rya21, lineAnimator.rxa22, lineAnimator.rya22, rp);
-        canvas.drawLine(lineAnimator.rxa31, lineAnimator.rya31, lineAnimator.rxa32, lineAnimator.rya32, rp);
+        paint.setMaskFilter(null);
+        paint.setStrokeWidth(30);
+
+        paint.setColor(Color.parseColor(COLOR_WHITE));
+        if (lineAnimator.wxa11 != lineAnimator.wxa12 && lineAnimator.wya11 != lineAnimator.wya12)
+            canvas.drawLine(lineAnimator.wxa11, lineAnimator.wya11, lineAnimator.wxa12, lineAnimator.wya12, paint);
+        if (lineAnimator.wxa21 != lineAnimator.wxa22 && lineAnimator.wya21 != lineAnimator.wya22)
+            canvas.drawLine(lineAnimator.wxa21, lineAnimator.wya21, lineAnimator.wxa22, lineAnimator.wya22, paint);
+        if (lineAnimator.wxa31 != lineAnimator.wxa32 && lineAnimator.wya31 != lineAnimator.wya32)
+            canvas.drawLine(lineAnimator.wxa31, lineAnimator.wya31, lineAnimator.wxa32, lineAnimator.wya32, paint);
+
+        paint.setColor(Color.parseColor(COLOR_RED));
+        if (lineAnimator.rxa11 != lineAnimator.rxa12 && lineAnimator.rya11 != lineAnimator.rya12)
+            canvas.drawLine(lineAnimator.rxa11, lineAnimator.rya11, lineAnimator.rxa12, lineAnimator.rya12, paint);
+        if (lineAnimator.rxa21 != lineAnimator.rxa22 && lineAnimator.rya21 != lineAnimator.rya22)
+            canvas.drawLine(lineAnimator.rxa21, lineAnimator.rya21, lineAnimator.rxa22, lineAnimator.rya22, paint);
+        if (lineAnimator.rxa31 != lineAnimator.rxa32 && lineAnimator.rya31 != lineAnimator.rya32)
+            canvas.drawLine(lineAnimator.rxa31, lineAnimator.rya31, lineAnimator.rxa32, lineAnimator.rya32, paint);
+
+
+        paint.setMaskFilter(new BlurMaskFilter(35, BlurMaskFilter.Blur.NORMAL));
+
+        paint.setStrokeWidth(80);
+
+
+        paint.setColor(Color.parseColor(COLOR_WHITE));
+        paint.setAlpha(0x10);
+        if (lineAnimator.wxa11 != lineAnimator.wxa12 && lineAnimator.wya11 != lineAnimator.wya12)
+            canvas.drawLine(lineAnimator.wxa11, lineAnimator.wya11 + 100, lineAnimator.wxa12, lineAnimator.wya12 + 100, paint);
+        if (lineAnimator.wxa21 != lineAnimator.wxa22 && lineAnimator.wya21 != lineAnimator.wya22)
+            canvas.drawLine(lineAnimator.wxa21, lineAnimator.wya21 + 100, lineAnimator.wxa22, lineAnimator.wya22 + 100, paint);
+        if (lineAnimator.wxa31 != lineAnimator.wxa32 && lineAnimator.wya31 != lineAnimator.wya32)
+            canvas.drawLine(lineAnimator.wxa31, lineAnimator.wya31 + 100, lineAnimator.wxa32, lineAnimator.wya32 + 100, paint);
+
+        paint.setColor(Color.parseColor(COLOR_RED));
+        paint.setAlpha(0x10);
+        if (lineAnimator.rxa11 != lineAnimator.rxa12 && lineAnimator.rya11 != lineAnimator.rya12)
+            canvas.drawLine(lineAnimator.rxa11, lineAnimator.rya11 + 100, lineAnimator.rxa12, lineAnimator.rya12 + 100, paint);
+        if (lineAnimator.rxa21 != lineAnimator.rxa22 && lineAnimator.rya21 != lineAnimator.rya22)
+            canvas.drawLine(lineAnimator.rxa21, lineAnimator.rya21 + 100, lineAnimator.rxa22, lineAnimator.rya22 + 100, paint);
+        if (lineAnimator.rxa31 != lineAnimator.rxa32 && lineAnimator.rya31 != lineAnimator.rya32)
+            canvas.drawLine(lineAnimator.rxa31, lineAnimator.rya31 + 100, lineAnimator.rxa32, lineAnimator.rya32 + 100, paint);
     }
-
-
 }

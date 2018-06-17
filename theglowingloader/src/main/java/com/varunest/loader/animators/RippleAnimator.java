@@ -15,10 +15,15 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.varunest.loader.Configuration;
+import com.varunest.loader.Constants;
 import com.varunest.loader.particles.Circle;
+import com.varunest.loader.particles.ParticleView;
 import com.varunest.loader.particles.Triangle;
 
 public class RippleAnimator {
+    private final static int PARTICLE_TYPE_TRIANGLE = 0;
+    private final static int PARTICLE_TYPE_CIRCLE = 1;
+
     private float circleMaxRadius;
     private float circleRadius, circleRadius2;
     private int circleStroke, circleStroke2;
@@ -26,7 +31,6 @@ public class RippleAnimator {
     private float cX, cY;
     private FrameLayout view;
     private Configuration configuration;
-
 
     public RippleAnimator(FrameLayout v, Configuration configuration) {
         view = v;
@@ -82,17 +86,25 @@ public class RippleAnimator {
         va2.start();
     }
 
-    // TODO: Fix logic for drawing triangle.
-    public void startParticleOne(int degree) {
+    public void startParticleAnimation(float degree, int particleType, int particleColor) {
         float length = 2 * circleMaxRadius;
-        float x = (float) (cX + (length) / Math.sqrt(2));
-        float y = (float) (cY - (length) / Math.sqrt(2));
-
-        final Triangle triangle = new Triangle(view.getContext());
+        float x = (float) (cX + length * Math.cos(Math.toRadians(degree)));
+        float y = (float) (cY - length * Math.sin(Math.toRadians(degree)));
+        final ParticleView particleView;
+        switch (particleType) {
+            case PARTICLE_TYPE_CIRCLE:
+                particleView = new Circle(view.getContext());
+                break;
+            case PARTICLE_TYPE_TRIANGLE:
+                particleView = new Triangle(view.getContext());
+                break;
+            default:
+                particleView = new Circle(view.getContext());
+        }
         int size = (int) (circleMaxRadius * .3f);
-        triangle.setLayoutParams(new ViewGroup.LayoutParams(size, size));
-        triangle.setPaintColor(configuration.getParticle1Color());
-        view.addView(triangle);
+        particleView.setLayoutParams(new ViewGroup.LayoutParams(size, size));
+        particleView.setPaintColor(particleColor);
+        view.addView(particleView);
 
         PropertyValuesHolder sP = PropertyValuesHolder.ofFloat("scale", 0, 1);
         PropertyValuesHolder rP = PropertyValuesHolder.ofFloat("rotation", 0, 360);
@@ -108,12 +120,12 @@ public class RippleAnimator {
                 float scale = (float) animation.getAnimatedValue("scale");
                 float alpha = (float) animation.getAnimatedValue("alpha");
                 float rotation = (float) animation.getAnimatedValue("rotation");
-                triangle.setX(x);
-                triangle.setY(y);
-                triangle.setRotation(rotation);
-                triangle.setScaleX(scale);
-                triangle.setScaleY(scale);
-                triangle.setAlpha(alpha);
+                particleView.setX(x);
+                particleView.setY(y);
+                particleView.setRotation(rotation);
+                particleView.setScaleX(scale);
+                particleView.setScaleY(scale);
+                particleView.setAlpha(alpha);
             }
         });
         va.setInterpolator(new AccelerateInterpolator(.4f));
@@ -124,107 +136,20 @@ public class RippleAnimator {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                view.removeView(triangle);
+                view.removeView(particleView);
             }
         });
     }
 
-    // TODO: Fix logic for drawing triangle.
-    public void startParticleTwo(final Callback callback) {
-        float length = 2 * circleMaxRadius;
-        float x = cX;
-        float y = cY + (length);
-
-        final Triangle triangle = new Triangle(view.getContext());
-        int size = (int) (circleMaxRadius * .3f);
-        triangle.setLayoutParams(new ViewGroup.LayoutParams(size, size));
-        triangle.setPaintColor(configuration.getParticle2Color());
-        view.addView(triangle);
-
-        PropertyValuesHolder sP = PropertyValuesHolder.ofFloat("scale", 0, 1);
-        PropertyValuesHolder rP = PropertyValuesHolder.ofFloat("rotation", 0, 360);
-        PropertyValuesHolder aP = PropertyValuesHolder.ofFloat("alpha", 1, 0);
-        PropertyValuesHolder xP = PropertyValuesHolder.ofFloat("x", cX, x);
-        PropertyValuesHolder yP = PropertyValuesHolder.ofFloat("y", cY, y);
-        ValueAnimator va = ValueAnimator.ofPropertyValuesHolder(xP, yP, sP, aP, rP);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float x = (float) animation.getAnimatedValue("x");
-                float y = (float) animation.getAnimatedValue("y");
-                float scale = (float) animation.getAnimatedValue("scale");
-                float alpha = (float) animation.getAnimatedValue("alpha");
-                float rotation = (float) animation.getAnimatedValue("rotation");
-                triangle.setX(x);
-                triangle.setY(y);
-                triangle.setRotation(rotation);
-                triangle.setScaleX(scale);
-                triangle.setScaleY(scale);
-                triangle.setAlpha(alpha);
-            }
-        });
-        va.setInterpolator(new AccelerateInterpolator(.4f));
-        va.setDuration(550);
-        va.start();
-
-        va.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                view.removeView(triangle);
-            }
-        });
-    }
-
-    public void startParticleThree(final Callback callback) {
-        float length = 2 * circleMaxRadius;
-        float x = (float) (cX - (length) / Math.sqrt(2));
-        float y = (float) (cY - (length) / Math.sqrt(2));
-
-        final Circle circle = new Circle(view.getContext());
-        int size = (int) (circleMaxRadius * .3f);
-        circle.setLayoutParams(new ViewGroup.LayoutParams(size, size));
-        circle.setPaintColor(configuration.getParticle3Color());
-        view.addView(circle);
-
-        PropertyValuesHolder sP = PropertyValuesHolder.ofFloat("scale", 0, 1);
-        PropertyValuesHolder aP = PropertyValuesHolder.ofFloat("alpha", 1, 0);
-        PropertyValuesHolder xP = PropertyValuesHolder.ofFloat("x", cX, x);
-        PropertyValuesHolder yP = PropertyValuesHolder.ofFloat("y", cY, y);
-        ValueAnimator va = ValueAnimator.ofPropertyValuesHolder(xP, yP, sP, aP);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float x = (float) animation.getAnimatedValue("x");
-                float y = (float) animation.getAnimatedValue("y");
-                float scale = (float) animation.getAnimatedValue("scale");
-                float alpha = (float) animation.getAnimatedValue("alpha");
-                circle.setX(x);
-                circle.setY(y);
-                circle.setScaleX(scale);
-                circle.setScaleY(scale);
-                circle.setAlpha(alpha);
-            }
-        });
-        va.setInterpolator(new AccelerateInterpolator(.4f));
-        va.setDuration(550);
-        va.start();
-
-        va.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                view.removeView(circle);
-            }
-        });
-    }
-
-    public void start(final Callback callback) {
+    public void start(final Callback callback, float degree1, float degree2, float degree3) {
         startCircleMajor(callback);
         startCircleMinor(callback);
-        startParticleOne(45);
-        startParticleTwo(callback);
-        startParticleThree(callback);
+        if (degree1 != Constants.INVALID_DEG)
+            startParticleAnimation(degree1, PARTICLE_TYPE_TRIANGLE, configuration.getParticle1Color());
+        if(degree2 != Constants.INVALID_DEG)
+            startParticleAnimation(degree2, PARTICLE_TYPE_CIRCLE, configuration.getParticle2Color());
+        if(degree3 != Constants.INVALID_DEG)
+            startParticleAnimation(degree3, PARTICLE_TYPE_TRIANGLE, configuration.getParticle3Color());
     }
 
     public void draw(Canvas canvas, Paint paint) {

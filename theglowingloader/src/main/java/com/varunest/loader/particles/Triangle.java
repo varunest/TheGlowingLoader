@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 
 import com.varunest.theglowingloader.R;
 
-public class Triangle extends View {
+public class Triangle extends ParticleView {
     private int w;
     private int h;
     private Paint paint;

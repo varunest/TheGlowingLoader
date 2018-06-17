@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 
 import com.varunest.loader.animators.RippleAnimator;
 import com.varunest.loader.animators.LineAnimator;
+import com.varunest.loader.particles.ParticleView;
 import com.varunest.theglowingloader.R;
 
 public class TheGlowingLoader extends FrameLayout {
@@ -49,8 +50,8 @@ public class TheGlowingLoader extends FrameLayout {
         configuration.setLine2Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_line_2_color, R.color.red)));
         configuration.setRippleColor(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_ripple_color, R.color.white)));
         configuration.setParticle1Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_particle_1_color, R.color.yellow)));
-        configuration.setParticle2Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_particle_2_color, R.color.blue)));
-        configuration.setParticle3Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_particle_3_color, R.color.white)));
+        configuration.setParticle2Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_particle_2_color, R.color.white)));
+        configuration.setParticle3Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_particle_3_color, R.color.blue)));
         configuration.setLineStrokeWidth(a.getInt(R.styleable.TheGlowingLoader_theglowingloader_line_stroke_width, Constants.DEF_LINE_STROKE_WIDTH));
     }
 
@@ -85,7 +86,7 @@ public class TheGlowingLoader extends FrameLayout {
                     public void onValueUpdated() {
                         invalidate();
                     }
-                });
+                }, 60,150,270);
             }
 
             @Override
@@ -96,7 +97,7 @@ public class TheGlowingLoader extends FrameLayout {
                     public void onValueUpdated() {
                         invalidate();
                     }
-                });
+                }, -60,0, Constants.INVALID_DEG);
             }
         });
     }

@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.View;
 
-public class Circle extends View {
+public class Circle extends ParticleView {
     private int w;
     private int h;
     private Paint paint;

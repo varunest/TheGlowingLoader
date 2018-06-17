@@ -25,8 +25,8 @@ public class Configuration {
         lineStrokeWidth = Constants.DEF_LINE_STROKE_WIDTH;
         rippleColor = ContextCompat.getColor(context, R.color.white);
         particle1Color = ContextCompat.getColor(context, R.color.yellow);
-        particle2Color = ContextCompat.getColor(context, R.color.blue);
-        particle3Color = ContextCompat.getColor(context, R.color.white);
+        particle2Color = ContextCompat.getColor(context, R.color.white);
+        particle3Color = ContextCompat.getColor(context, R.color.blue);
     }
 
     public int getLine1Color() {

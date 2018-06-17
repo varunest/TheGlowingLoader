@@ -467,7 +467,7 @@ public class LineAnimator {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                callback.startFirstCircleAnimation(x3, y3);
+                callback.startSecondCircleAnimation(x3, y3);
             }
         });
 
@@ -475,7 +475,7 @@ public class LineAnimator {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                callback.startSecondCircleAnimation(x2, y2);
+                callback.startFirstCircleAnimation(x2, y2);
             }
         });
 

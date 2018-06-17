@@ -11,12 +11,17 @@ I have made it so that it can be easily customized. You can change line stroke w
 
 Library supports OS on API 14 and above.
 
+**[Download Demo Apk](demo/app-debug.apk)**
+
 #### Here is how the loader looks by default:
 ![Showcase Video](art/default.gif)
 
 #### But you can also tweak it according to your need:
-![Customized One](art/black_green.gif)
-![Customized Two](art/grey_blue.gif)
+| Example A                               | Example B|
+| -------------                           | -------------                       |
+| ![Customized One](art/black_green.gif)  | ![Customized Two](art/grey_blue.gif)  |
+
+
 
 
 ## Dependency

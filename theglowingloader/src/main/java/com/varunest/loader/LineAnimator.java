@@ -14,12 +14,14 @@ import android.view.animation.DecelerateInterpolator;
 
 public class LineAnimator {
     private View view;
+    private Configuration configuration;
     private float x1, x2, x3, x4, y1, y2, y3, y4;
     private float wxa11, wxa12, wya11, wya12, wxa21, wya21, wxa22, wya22, wxa31, wya31, wxa32, wya32;
     private float rxa11, rxa12, rya11, rya12, rxa21, rya21, rxa22, rya22, rxa31, rya31, rxa32, rya32;
 
-    public LineAnimator(View view) {
+    public LineAnimator(View view, Configuration configuration) {
         this.view = view;
+        this.configuration = configuration;
     }
 
     public void updateEdgeCoordinates(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4) {
@@ -54,9 +56,9 @@ public class LineAnimator {
     public void draw(Canvas canvas, Paint paint) {
         paint.setStyle(Paint.Style.STROKE);
         paint.setMaskFilter(null);
-        paint.setStrokeWidth(30);
+        paint.setStrokeWidth(configuration.getLineStrokeWidth());
 
-        paint.setColor(Color.parseColor(Constants.COLOR_WHITE));
+        paint.setColor(configuration.getLine1Color());
         if (wxa11 != wxa12 && wya11 != wya12)
             canvas.drawLine(wxa11, wya11, wxa12, wya12, paint);
         if (wxa21 != wxa22 && wya21 != wya22)
@@ -64,7 +66,7 @@ public class LineAnimator {
         if (wxa31 != wxa32 && wya31 != wya32)
             canvas.drawLine(wxa31, wya31, wxa32, wya32, paint);
 
-        paint.setColor(Color.parseColor(Constants.COLOR_RED));
+        paint.setColor(configuration.getLine2Color());
         if (rxa11 != rxa12 && rya11 != rya12)
             canvas.drawLine(rxa11, rya11, rxa12, rya12, paint);
         if (rxa21 != rxa22 && rya21 != rya22)
@@ -75,10 +77,10 @@ public class LineAnimator {
 
         paint.setMaskFilter(new BlurMaskFilter(70, BlurMaskFilter.Blur.NORMAL));
 
-        paint.setStrokeWidth(80);
+        //TODO: REmove hardcoded stroke value;
+        paint.setStrokeWidth(2.666f * configuration.getLineStrokeWidth());
 
-
-        paint.setColor(Color.parseColor(Constants.COLOR_WHITE));
+        paint.setColor(configuration.getLine1Color());
         paint.setAlpha(0x38);
         if (wxa11 != wxa12 && wya11 != wya12)
             canvas.drawLine(wxa11, wya11 + 100, wxa12, wya12 + 100, paint);
@@ -87,7 +89,7 @@ public class LineAnimator {
         if (wxa31 != wxa32 && wya31 != wya32)
             canvas.drawLine(wxa31, wya31 + 100, wxa32, wya32 + 100, paint);
 
-        paint.setColor(Color.parseColor(Constants.COLOR_RED));
+        paint.setColor(configuration.getLine2Color());
         paint.setAlpha(0x38);
         if (rxa11 != rxa12 && rya11 != rya12)
             canvas.drawLine(rxa11, rya11 + 100, rxa12, rya12 + 100, paint);

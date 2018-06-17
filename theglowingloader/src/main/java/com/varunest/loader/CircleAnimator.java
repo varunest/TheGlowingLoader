@@ -17,6 +17,7 @@ public class CircleAnimator {
     private float circleAlpha, circleAlpha2;
     private float cX, cY;
     private View view;
+    private Configuration configuration;
 
     private float p1x, p2x, p3x, p1y, p2y, p3y;
 
@@ -25,8 +26,9 @@ public class CircleAnimator {
     private float p3Radius, p3Alpha;
 
 
-    CircleAnimator(View v) {
+    CircleAnimator(View v, Configuration configuration) {
         view = v;
+        this.configuration = configuration;
     }
 
     public void setCircleMaxRadius(float r) {
@@ -175,23 +177,24 @@ public class CircleAnimator {
         paint.setMaskFilter(null);
         paint.setStyle(Paint.Style.STROKE);
 
-        paint.setColor(Color.parseColor(Constants.COLOR_WHITE));
+        paint.setColor(configuration.getRippleColor());
         paint.setStrokeWidth(circleStroke);
         paint.setAlpha((int) (255 * circleAlpha));
         canvas.drawCircle(cX, cY, circleRadius, paint);
 
         paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
+        // TODO: remove hardcoding of stroke width.
         paint.setStrokeWidth(40);
         paint.setAlpha((int) (255 * circleAlpha * .4));
         canvas.drawCircle(cX, cY + 100, circleRadius, paint);
 
         paint.setMaskFilter(null);
-        paint.setColor(Color.parseColor(Constants.COLOR_WHITE));
+        paint.setColor(configuration.getRippleColor());
         paint.setStrokeWidth(circleStroke2);
         paint.setAlpha((int) (255 * circleAlpha2));
         canvas.drawCircle(cX, cY, circleRadius2, paint);
 
-        paint.setColor(Color.parseColor(Constants.COLOR_YELLOW));
+        paint.setColor(configuration.getParticle1Color());
         paint.setStyle(Paint.Style.FILL);
         paint.setAlpha(Math.min((int) (255 * p1Alpha * 1.5f), 255));
         Path p1Path = new Path();
@@ -202,7 +205,7 @@ public class CircleAnimator {
         p1Path.close();
         canvas.drawPath(p1Path, paint);
 
-        paint.setColor(Color.parseColor(Constants.COLOR_BLUE));
+        paint.setColor(configuration.getParticle2Color());
         paint.setStyle(Paint.Style.FILL);
         paint.setAlpha(Math.min((int) (255 * p2Alpha * 1.5f), 255));
         Path p2Path = new Path();
@@ -213,7 +216,7 @@ public class CircleAnimator {
         p2Path.close();
         canvas.drawPath(p2Path, paint);
 
-        paint.setColor(Color.parseColor(Constants.COLOR_WHITE));
+        paint.setColor(configuration.getParticle3Color());
         paint.setStyle(Paint.Style.FILL);
         paint.setAlpha(Math.min((int) (255 * p3Alpha * 1.5f), 255));
         canvas.drawCircle(p3x, p3y, p3Radius, paint);

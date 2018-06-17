@@ -57,7 +57,7 @@ public class TheGlowingLoader extends FrameLayout {
         configuration.setLineStrokeWidth(a.getInt(R.styleable.TheGlowingLoader_theglowingloader_line_stroke_width, Constants.DEF_LINE_STROKE_WIDTH));
         configuration.setDisableShadows(a.getBoolean(R.styleable.TheGlowingLoader_theglowingloader_disable_shadows, false));
         configuration.setDisableRipple(a.getBoolean(R.styleable.TheGlowingLoader_theglowingloader_disable_ripple, false));
-        configuration.setShadowOpacity(a.getFloat(R.styleable.TheGlowingLoader_theglowingloader_shadow_opacity, .2f));
+        configuration.setShadowOpacity(a.getFloat(R.styleable.TheGlowingLoader_theglowingloader_shadow_opacity, Constants.DEF_SHADOW_OPACITY));
     }
 
     public void setConfiguration(Configuration configuration) {

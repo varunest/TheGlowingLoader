@@ -36,7 +36,7 @@ and then add dependency
 
 ```groovy
 dependencies {
-	        implementation 'com.github.varunest:TheGlowingLoader:1.0.4'
+	        implementation 'com.github.varunest:TheGlowingLoader:1.0.5'
 	}
 ```
 

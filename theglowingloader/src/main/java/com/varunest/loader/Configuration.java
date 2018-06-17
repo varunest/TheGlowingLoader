@@ -25,7 +25,7 @@ public class Configuration {
     public Configuration(Context context) {
         disableShadows = false;
         disableRipple = false;
-        shadowOpacity = .2f;
+        shadowOpacity = Constants.DEF_SHADOW_OPACITY;
         line1Color = ContextCompat.getColor(context, R.color.white);
         line2Color = ContextCompat.getColor(context, R.color.red);
         lineStrokeWidth = Constants.DEF_LINE_STROKE_WIDTH;

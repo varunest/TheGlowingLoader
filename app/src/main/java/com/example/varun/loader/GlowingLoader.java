@@ -112,7 +112,6 @@ public class GlowingLoader extends View {
 //        canvas.drawLine(x2, y2, x3, y3, wp);
 //        canvas.drawLine(x3, y3, x4, y4, wp);
         lineAnimator.draw(canvas, paint);
-
         circleAnimator1.draw(canvas, paint);
         circleAnimator2.draw(canvas, paint);
     }

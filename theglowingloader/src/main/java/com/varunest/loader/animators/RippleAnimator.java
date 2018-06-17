@@ -161,11 +161,13 @@ public class RippleAnimator {
         paint.setAlpha((int) (255 * circleAlpha));
         canvas.drawCircle(cX, cY, circleRadius, paint);
 
-        paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
+        if (!configuration.isDisableShadows()) {
+            paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
+            paint.setStrokeWidth(.28f * circleRadius);
+            paint.setAlpha((int) (255 * circleAlpha * .4));
+            canvas.drawCircle(cX, cY + 100, circleRadius, paint);
+        }
 
-        paint.setStrokeWidth(.28f * circleRadius);
-        paint.setAlpha((int) (255 * circleAlpha * .4));
-        canvas.drawCircle(cX, cY + 100, circleRadius, paint);
 
         paint.setMaskFilter(null);
         paint.setColor(configuration.getRippleColor());

@@ -4,14 +4,15 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.varunest.loader.animators.RippleAnimator;
 import com.varunest.loader.animators.LineAnimator;
-import com.varunest.loader.particles.ParticleView;
 import com.varunest.theglowingloader.R;
 
 public class TheGlowingLoader extends FrameLayout {
@@ -37,6 +38,7 @@ public class TheGlowingLoader extends FrameLayout {
         init();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public TheGlowingLoader(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         getStuffFromXML(attrs);
@@ -53,6 +55,8 @@ public class TheGlowingLoader extends FrameLayout {
         configuration.setParticle2Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_particle_2_color, R.color.white)));
         configuration.setParticle3Color(ContextCompat.getColor(getContext(), a.getResourceId(R.styleable.TheGlowingLoader_theglowingloader_particle_3_color, R.color.blue)));
         configuration.setLineStrokeWidth(a.getInt(R.styleable.TheGlowingLoader_theglowingloader_line_stroke_width, Constants.DEF_LINE_STROKE_WIDTH));
+        configuration.setDisableShadows(a.getBoolean(R.styleable.TheGlowingLoader_theglowingloader_disable_shadows, false));
+        configuration.setDisableRipple(a.getBoolean(R.styleable.TheGlowingLoader_theglowingloader_disable_ripple, false));
     }
 
     public void setConfiguration(Configuration configuration) {
@@ -80,24 +84,29 @@ public class TheGlowingLoader extends FrameLayout {
 
             @Override
             public void startFirstCircleAnimation(float x, float y) {
-                rippleAnimator1.setCircleCenter(x, y);
-                rippleAnimator1.start(new RippleAnimator.Callback() {
-                    @Override
-                    public void onValueUpdated() {
-                        invalidate();
-                    }
-                }, 60,150,270);
+                if (!configuration.isDisableRipple()) {
+                    rippleAnimator1.setCircleCenter(x, y);
+                    rippleAnimator1.start(new RippleAnimator.Callback() {
+                        @Override
+                        public void onValueUpdated() {
+                            invalidate();
+                        }
+                    }, 60, 150, 270);
+                }
             }
 
             @Override
             public void startSecondCircleAnimation(float x, float y) {
-                rippleAnimator2.setCircleCenter(x, y);
-                rippleAnimator2.start(new RippleAnimator.Callback() {
-                    @Override
-                    public void onValueUpdated() {
-                        invalidate();
-                    }
-                }, -60,0, Constants.INVALID_DEG);
+                if (!configuration.isDisableRipple()) {
+                    rippleAnimator2.setCircleCenter(x, y);
+                    rippleAnimator2.start(new RippleAnimator.Callback() {
+                        @Override
+                        public void onValueUpdated() {
+                            invalidate();
+                        }
+                    }, -60, 0, Constants.INVALID_DEG);
+                }
+
             }
         });
     }

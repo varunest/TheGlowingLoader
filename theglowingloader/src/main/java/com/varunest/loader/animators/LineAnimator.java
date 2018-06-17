@@ -77,25 +77,27 @@ public class LineAnimator {
             canvas.drawLine(rxa31, rya31, rxa32, rya32, paint);
 
 
-        paint.setMaskFilter(new BlurMaskFilter(70, BlurMaskFilter.Blur.NORMAL));
-        paint.setStrokeWidth(2.666f * configuration.getLineStrokeWidth());
-        paint.setColor(configuration.getLine1Color());
-        paint.setAlpha(0x38);
-        if (wxa11 != wxa12 && wya11 != wya12)
-            canvas.drawLine(wxa11, wya11 + 100, wxa12, wya12 + 100, paint);
-        if (wxa21 != wxa22 && wya21 != wya22)
-            canvas.drawLine(wxa21, wya21 + 100, wxa22, wya22 + 100, paint);
-        if (wxa31 != wxa32 && wya31 != wya32)
-            canvas.drawLine(wxa31, wya31 + 100, wxa32, wya32 + 100, paint);
+        if (!configuration.isDisableShadows()) {
+            paint.setMaskFilter(new BlurMaskFilter(70, BlurMaskFilter.Blur.NORMAL));
+            paint.setStrokeWidth(2.666f * configuration.getLineStrokeWidth());
+            paint.setColor(configuration.getLine1Color());
+            paint.setAlpha(0x38);
+            if (wxa11 != wxa12 && wya11 != wya12)
+                canvas.drawLine(wxa11, wya11 + 100, wxa12, wya12 + 100, paint);
+            if (wxa21 != wxa22 && wya21 != wya22)
+                canvas.drawLine(wxa21, wya21 + 100, wxa22, wya22 + 100, paint);
+            if (wxa31 != wxa32 && wya31 != wya32)
+                canvas.drawLine(wxa31, wya31 + 100, wxa32, wya32 + 100, paint);
 
-        paint.setColor(configuration.getLine2Color());
-        paint.setAlpha(0x38);
-        if (rxa11 != rxa12 && rya11 != rya12)
-            canvas.drawLine(rxa11, rya11 + 100, rxa12, rya12 + 100, paint);
-        if (rxa21 != rxa22 && rya21 != rya22)
-            canvas.drawLine(rxa21, rya21 + 100, rxa22, rya22 + 100, paint);
-        if (rxa31 != rxa32 && rya31 != rya32)
-            canvas.drawLine(rxa31, rya31 + 100, rxa32, rya32 + 100, paint);
+            paint.setColor(configuration.getLine2Color());
+            paint.setAlpha(0x38);
+            if (rxa11 != rxa12 && rya11 != rya12)
+                canvas.drawLine(rxa11, rya11 + 100, rxa12, rya12 + 100, paint);
+            if (rxa21 != rxa22 && rya21 != rya22)
+                canvas.drawLine(rxa21, rya21 + 100, rxa22, rya22 + 100, paint);
+            if (rxa31 != rxa32 && rya31 != rya32)
+                canvas.drawLine(rxa31, rya31 + 100, rxa32, rya32 + 100, paint);
+        }
     }
 
     public void start(final Callback callback) {

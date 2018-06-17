@@ -14,12 +14,16 @@ public class Configuration {
     private int particle2Color;
     private int particle3Color;
     private int lineStrokeWidth;
+    private boolean disableShadows;
+    private boolean disableRipple;
 
     Configuration() {
 
     }
 
     public Configuration(Context context) {
+        disableShadows = false;
+        disableRipple = false;
         line1Color = ContextCompat.getColor(context, R.color.white);
         line2Color = ContextCompat.getColor(context, R.color.red);
         lineStrokeWidth = Constants.DEF_LINE_STROKE_WIDTH;
@@ -83,5 +87,21 @@ public class Configuration {
 
     public void setLineStrokeWidth(int lineStrokeWidth) {
         this.lineStrokeWidth = lineStrokeWidth;
+    }
+
+    public boolean isDisableShadows() {
+        return disableShadows;
+    }
+
+    public void setDisableShadows(boolean disableShadows) {
+        this.disableShadows = disableShadows;
+    }
+
+    public boolean isDisableRipple() {
+        return disableRipple;
+    }
+
+    public void setDisableRipple(boolean disableRipple) {
+        this.disableRipple = disableRipple;
     }
 }

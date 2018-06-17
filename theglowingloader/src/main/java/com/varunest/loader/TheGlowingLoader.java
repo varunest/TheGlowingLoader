@@ -7,16 +7,16 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.view.View;
+import android.widget.FrameLayout;
 
-import com.varunest.loader.animators.CircleAnimator;
+import com.varunest.loader.animators.RippleAnimator;
 import com.varunest.loader.animators.LineAnimator;
 import com.varunest.theglowingloader.R;
 
-public class TheGlowingLoader extends View {
+public class TheGlowingLoader extends FrameLayout {
     private Paint paint;
     private LineAnimator lineAnimator;
-    private CircleAnimator circleAnimator1, circleAnimator2;
+    private RippleAnimator rippleAnimator1, rippleAnimator2;
     private Configuration configuration;
 
     public TheGlowingLoader(Context context) {
@@ -54,12 +54,17 @@ public class TheGlowingLoader extends View {
         configuration.setLineStrokeWidth(a.getInt(R.styleable.TheGlowingLoader_theglowingloader_line_stroke_width, Constants.DEF_LINE_STROKE_WIDTH));
     }
 
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
     private void init() {
         if (configuration == null) {
             configuration = new Configuration(getContext());
         }
-        circleAnimator1 = new CircleAnimator(TheGlowingLoader.this, configuration);
-        circleAnimator2 = new CircleAnimator(TheGlowingLoader.this, configuration);
+        setWillNotDraw(false);
+        rippleAnimator1 = new RippleAnimator(TheGlowingLoader.this, configuration);
+        rippleAnimator2 = new RippleAnimator(TheGlowingLoader.this, configuration);
         lineAnimator = new LineAnimator(TheGlowingLoader.this, configuration);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -74,8 +79,8 @@ public class TheGlowingLoader extends View {
 
             @Override
             public void startFirstCircleAnimation(float x, float y) {
-                circleAnimator1.setCircleCenter(x, y);
-                circleAnimator1.start(new CircleAnimator.Callback() {
+                rippleAnimator1.setCircleCenter(x, y);
+                rippleAnimator1.start(new RippleAnimator.Callback() {
                     @Override
                     public void onValueUpdated() {
                         invalidate();
@@ -85,8 +90,8 @@ public class TheGlowingLoader extends View {
 
             @Override
             public void startSecondCircleAnimation(float x, float y) {
-                circleAnimator2.setCircleCenter(x, y);
-                circleAnimator2.start(new CircleAnimator.Callback() {
+                rippleAnimator2.setCircleCenter(x, y);
+                rippleAnimator2.start(new RippleAnimator.Callback() {
                     @Override
                     public void onValueUpdated() {
                         invalidate();
@@ -117,9 +122,8 @@ public class TheGlowingLoader extends View {
         y4 = h / 2 - .02f * w;
 
         float circleMaxRadius = (x4 - x1) * .18f;
-        circleAnimator2.setCircleMaxRadius(circleMaxRadius);
-        circleAnimator1.setCircleMaxRadius(circleMaxRadius);
-
+        rippleAnimator2.setCircleMaxRadius(circleMaxRadius);
+        rippleAnimator1.setCircleMaxRadius(circleMaxRadius);
         lineAnimator.updateEdgeCoordinates(x1, x2, x3, x4, y1, y2, y3, y4);
         startAnimation();
     }
@@ -128,7 +132,7 @@ public class TheGlowingLoader extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         lineAnimator.draw(canvas, paint);
-        circleAnimator1.draw(canvas, paint);
-        circleAnimator2.draw(canvas, paint);
+        rippleAnimator1.draw(canvas, paint);
+        rippleAnimator2.draw(canvas, paint);
     }
 }

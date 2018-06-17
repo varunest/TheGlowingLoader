@@ -4,20 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
 
-import com.varunest.theglowingloader.R;
-
-public class Triangle extends View {
+public class Circle extends View {
     private int w;
     private int h;
     private Paint paint;
 
-    public Triangle(Context context) {
+    public Circle(Context context) {
         super(context);
         init();
     }
@@ -38,13 +32,7 @@ public class Triangle extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Path path = new Path();
-        path.moveTo(w / 2, 0);
-        path.lineTo(w, h);
-        path.lineTo(0, h);
-        path.lineTo(w / 2, 0);
-
-        canvas.drawPath(path, paint);
+        canvas.drawCircle(w / 2, h / 2, w / 2, paint);
     }
 
     public void setPaintColor(int paintColor) {

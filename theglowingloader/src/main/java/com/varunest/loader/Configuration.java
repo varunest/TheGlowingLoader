@@ -15,7 +15,7 @@ public class Configuration {
     private int particle3Color;
     private int lineStrokeWidth;
 
-    public Configuration() {
+    Configuration() {
 
     }
 

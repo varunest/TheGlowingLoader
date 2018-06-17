@@ -11,6 +11,8 @@ I have made it so that it can be easily customized. You can change line stroke w
 
 Library supports OS on API 14 and above.
 
+![Showcase Video](art/default.gif)
+
 ## Dependency
 
 Add it in your root build.gradle at the end of repositories:

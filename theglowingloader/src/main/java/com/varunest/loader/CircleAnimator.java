@@ -41,7 +41,7 @@ public class CircleAnimator {
     public void startCircleMajor(final Callback callback) {
         PropertyValuesHolder rp = PropertyValuesHolder.ofFloat("radius", 0, circleMaxRadius);
         PropertyValuesHolder ap = PropertyValuesHolder.ofFloat("alpha", 1, 0);
-        PropertyValuesHolder sp = PropertyValuesHolder.ofInt("stroke", 30, 0);
+        PropertyValuesHolder sp = PropertyValuesHolder.ofInt("stroke", (int) (circleMaxRadius * .15f), 0);
 
         ValueAnimator va = ValueAnimator.ofPropertyValuesHolder(rp, ap, sp);
         va.setInterpolator(new AccelerateInterpolator(.4f));
@@ -61,7 +61,7 @@ public class CircleAnimator {
     public void startCircleMinor(final Callback callback) {
         PropertyValuesHolder rp2 = PropertyValuesHolder.ofFloat("radius", 0, circleMaxRadius * .60f);
         PropertyValuesHolder ap2 = PropertyValuesHolder.ofFloat("alpha", 1, 0);
-        PropertyValuesHolder sp2 = PropertyValuesHolder.ofInt("stroke", 10, 0);
+        PropertyValuesHolder sp2 = PropertyValuesHolder.ofInt("stroke", (int) (circleMaxRadius * .06f), 0);
 
         ValueAnimator va2 = ValueAnimator.ofPropertyValuesHolder(rp2, ap2, sp2);
         va2.setInterpolator(new AccelerateInterpolator(.4f));
@@ -79,12 +79,42 @@ public class CircleAnimator {
     }
 
     // TODO: Fix logic for drawing triangle.
+    public void startParticleOne(final Callback callback) {
+        float length = 2 * circleMaxRadius;
+        float x = (float) (cX + (length) / Math.sqrt(2));
+        float y = (float) (cY - (length) / Math.sqrt(2));
+
+        PropertyValuesHolder sP = PropertyValuesHolder.ofFloat("side", 0, circleMaxRadius * .24f);
+        PropertyValuesHolder aP = PropertyValuesHolder.ofFloat("alpha", 1, 0);
+        PropertyValuesHolder xP = PropertyValuesHolder.ofFloat("x", cX, x);
+        PropertyValuesHolder yP = PropertyValuesHolder.ofFloat("y", cY, y);
+        ValueAnimator va = ValueAnimator.ofPropertyValuesHolder(xP, yP, sP, aP);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                p1x = (float) animation.getAnimatedValue("x");
+                p1y = (float) animation.getAnimatedValue("y");
+                float side = (float) animation.getAnimatedValue("side");
+                p1x2 = p1x - side;
+                p1x3 = (float) (p1x - side * Math.sin(60));
+                p1y3 = (float) (p1y - side * Math.cos(60));
+                p1y2 = p1y3;
+                p1Alpha = (float) animation.getAnimatedValue("alpha");
+                callback.onValueUpdated();
+            }
+        });
+        va.setInterpolator(new AccelerateInterpolator(.4f));
+        va.setDuration(550);
+        va.start();
+    }
+
+    // TODO: Fix logic for drawing triangle.
     public void startParticleTwo(final Callback callback) {
         float length = 2 * circleMaxRadius;
         float x = cX;
         float y = cY + (length);
 
-        PropertyValuesHolder sP = PropertyValuesHolder.ofFloat("side", 0, 200);
+        PropertyValuesHolder sP = PropertyValuesHolder.ofFloat("side", 0, circleMaxRadius * 1.3f);
         PropertyValuesHolder aP = PropertyValuesHolder.ofFloat("alpha", 1, 0);
         PropertyValuesHolder xP = PropertyValuesHolder.ofFloat("x", cX, x);
         PropertyValuesHolder yP = PropertyValuesHolder.ofFloat("y", cY, y);
@@ -113,7 +143,7 @@ public class CircleAnimator {
         float x = (float) (cX - (length) / Math.sqrt(2));
         float y = (float) (cY - (length) / Math.sqrt(2));
 
-        PropertyValuesHolder rP = PropertyValuesHolder.ofFloat("radius", 0, 20);
+        PropertyValuesHolder rP = PropertyValuesHolder.ofFloat("radius", 0, circleMaxRadius * .12f);
         PropertyValuesHolder aP = PropertyValuesHolder.ofFloat("alpha", 1, 0);
         PropertyValuesHolder xP = PropertyValuesHolder.ofFloat("x", cX, x);
         PropertyValuesHolder yP = PropertyValuesHolder.ofFloat("y", cY, y);
@@ -125,36 +155,6 @@ public class CircleAnimator {
                 p3y = (float) animation.getAnimatedValue("y");
                 p3Radius = (float) animation.getAnimatedValue("radius");
                 p3Alpha = (float) animation.getAnimatedValue("alpha");
-                callback.onValueUpdated();
-            }
-        });
-        va.setInterpolator(new AccelerateInterpolator(.4f));
-        va.setDuration(550);
-        va.start();
-    }
-
-    // TODO: Fix logic for drawing triangle.
-    public void startParticleOne(final Callback callback) {
-        float length = 2 * circleMaxRadius;
-        float x = (float) (cX + (length) / Math.sqrt(2));
-        float y = (float) (cY - (length) / Math.sqrt(2));
-
-        PropertyValuesHolder sP = PropertyValuesHolder.ofFloat("side", 0, 40);
-        PropertyValuesHolder aP = PropertyValuesHolder.ofFloat("alpha", 1, 0);
-        PropertyValuesHolder xP = PropertyValuesHolder.ofFloat("x", cX, x);
-        PropertyValuesHolder yP = PropertyValuesHolder.ofFloat("y", cY, y);
-        ValueAnimator va = ValueAnimator.ofPropertyValuesHolder(xP, yP, sP, aP);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                p1x = (float) animation.getAnimatedValue("x");
-                p1y = (float) animation.getAnimatedValue("y");
-                float side = (float) animation.getAnimatedValue("side");
-                p1x2 = p1x - side;
-                p1x3 = (float) (p1x - side * Math.sin(60));
-                p1y3 = (float) (p1y - side * Math.cos(60));
-                p1y2 = p1y3;
-                p1Alpha = (float) animation.getAnimatedValue("alpha");
                 callback.onValueUpdated();
             }
         });

@@ -73,7 +73,7 @@ public class LineAnimator {
             canvas.drawLine(rxa31, rya31, rxa32, rya32, paint);
 
 
-        paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
+        paint.setMaskFilter(new BlurMaskFilter(70, BlurMaskFilter.Blur.NORMAL));
 
         paint.setStrokeWidth(80);
 

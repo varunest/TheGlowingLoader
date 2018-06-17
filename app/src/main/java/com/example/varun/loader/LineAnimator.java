@@ -4,17 +4,21 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
-public class LineValueAnimator {
+public class LineAnimator {
     private View view;
     private float x1, x2, x3, x4, y1, y2, y3, y4;
-    float wxa11, wxa12, wya11, wya12, wxa21, wya21, wxa22, wya22, wxa31, wya31, wxa32, wya32;
-    float rxa11, rxa12, rya11, rya12, rxa21, rya21, rxa22, rya22, rxa31, rya31, rxa32, rya32;
+    private float wxa11, wxa12, wya11, wya12, wxa21, wya21, wxa22, wya22, wxa31, wya31, wxa32, wya32;
+    private float rxa11, rxa12, rya11, rya12, rxa21, rya21, rxa22, rya22, rxa31, rya31, rxa32, rya32;
 
-    public LineValueAnimator(View view) {
+    public LineAnimator(View view) {
         this.view = view;
     }
 
@@ -47,11 +51,67 @@ public class LineValueAnimator {
         }
     }
 
+    public void draw(Canvas canvas, Paint paint) {
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setMaskFilter(null);
+        paint.setStrokeWidth(30);
+
+        paint.setColor(Color.parseColor(Constants.COLOR_WHITE));
+        if (wxa11 != wxa12 && wya11 != wya12)
+            canvas.drawLine(wxa11, wya11, wxa12, wya12, paint);
+        if (wxa21 != wxa22 && wya21 != wya22)
+            canvas.drawLine(wxa21, wya21, wxa22, wya22, paint);
+        if (wxa31 != wxa32 && wya31 != wya32)
+            canvas.drawLine(wxa31, wya31, wxa32, wya32, paint);
+
+        paint.setColor(Color.parseColor(Constants.COLOR_RED));
+        if (rxa11 != rxa12 && rya11 != rya12)
+            canvas.drawLine(rxa11, rya11, rxa12, rya12, paint);
+        if (rxa21 != rxa22 && rya21 != rya22)
+            canvas.drawLine(rxa21, rya21, rxa22, rya22, paint);
+        if (rxa31 != rxa32 && rya31 != rya32)
+            canvas.drawLine(rxa31, rya31, rxa32, rya32, paint);
+
+
+        paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
+
+        paint.setStrokeWidth(80);
+
+
+        paint.setColor(Color.parseColor(Constants.COLOR_WHITE));
+        paint.setAlpha(0x38);
+        if (wxa11 != wxa12 && wya11 != wya12)
+            canvas.drawLine(wxa11, wya11 + 100, wxa12, wya12 + 100, paint);
+        if (wxa21 != wxa22 && wya21 != wya22)
+            canvas.drawLine(wxa21, wya21 + 100, wxa22, wya22 + 100, paint);
+        if (wxa31 != wxa32 && wya31 != wya32)
+            canvas.drawLine(wxa31, wya31 + 100, wxa32, wya32 + 100, paint);
+
+        paint.setColor(Color.parseColor(Constants.COLOR_RED));
+        paint.setAlpha(0x38);
+        if (rxa11 != rxa12 && rya11 != rya12)
+            canvas.drawLine(rxa11, rya11 + 100, rxa12, rya12 + 100, paint);
+        if (rxa21 != rxa22 && rya21 != rya22)
+            canvas.drawLine(rxa21, rya21 + 100, rxa22, rya22 + 100, paint);
+        if (rxa31 != rxa32 && rya31 != rya32)
+            canvas.drawLine(rxa31, rya31 + 100, rxa32, rya32 + 100, paint);
+    }
+
     public void start(final Callback callback) {
         playForwardAnimation(new LocalCallback() {
             @Override
             public void onValueUpdated() {
                 callback.onValueUpdated();
+            }
+
+            @Override
+            public void startFirstCircleAnimation(float x, float y) {
+                callback.startFirstCircleAnimation(x, y);
+            }
+
+            @Override
+            public void startSecondCircleAnimation(float x, float y) {
+                callback.startSecondCircleAnimation(x, y);
             }
 
             @Override
@@ -69,6 +129,17 @@ public class LineValueAnimator {
             }
 
             @Override
+            public void startFirstCircleAnimation(float x, float y) {
+                callback.startFirstCircleAnimation(x, y);
+            }
+
+            @Override
+            public void startSecondCircleAnimation(float x, float y) {
+                callback.startSecondCircleAnimation(x, y);
+            }
+
+
+            @Override
             public void onComplete() {
 
             }
@@ -81,6 +152,16 @@ public class LineValueAnimator {
                     @Override
                     public void onValueUpdated() {
                         callback.onValueUpdated();
+                    }
+
+                    @Override
+                    public void startFirstCircleAnimation(float x, float y) {
+                        callback.startFirstCircleAnimation(x, y);
+                    }
+
+                    @Override
+                    public void startSecondCircleAnimation(float x, float y) {
+                        callback.startSecondCircleAnimation(x, y);
                     }
 
                     @Override
@@ -100,6 +181,16 @@ public class LineValueAnimator {
             }
 
             @Override
+            public void startFirstCircleAnimation(float x, float y) {
+                callback.startFirstCircleAnimation(x, y);
+            }
+
+            @Override
+            public void startSecondCircleAnimation(float x, float y) {
+                callback.startSecondCircleAnimation(x, y);
+            }
+
+            @Override
             public void onComplete() {
 
             }
@@ -112,6 +203,16 @@ public class LineValueAnimator {
                     @Override
                     public void onValueUpdated() {
                         callback.onValueUpdated();
+                    }
+
+                    @Override
+                    public void startFirstCircleAnimation(float x, float y) {
+                        callback.startFirstCircleAnimation(x, y);
+                    }
+
+                    @Override
+                    public void startSecondCircleAnimation(float x, float y) {
+                        callback.startSecondCircleAnimation(x, y);
                     }
 
                     @Override
@@ -154,6 +255,7 @@ public class LineValueAnimator {
                 callback.onValueUpdated();
             }
         });
+
 
         va21 = ValueAnimator.ofPropertyValuesHolder(px2, py2);
         va21.setInterpolator(new AccelerateInterpolator(1.8f));
@@ -199,9 +301,9 @@ public class LineValueAnimator {
             }
         });
 
-        int tw11 = 416;
-        int tw21 = 133;
-        int tw31 = 500;
+        int tw11 = 450;
+        int tw21 = 143;
+        int tw31 = 510;
         va11.setDuration(tw11);
         va21.setDuration(tw21);
         va31.setDuration(tw31);
@@ -209,8 +311,8 @@ public class LineValueAnimator {
         va21.setStartDelay(tw11);
         va31.setStartDelay(tw11 + tw21);
 
-        int tw12 = 450;
-        int tw22 = 150;
+        int tw12 = 510;
+        int tw22 = 165;
         int tw32 = 433;
         va12.setDuration(tw12);
         va22.setDuration(tw22);
@@ -226,6 +328,22 @@ public class LineValueAnimator {
         va22.start();
         va31.start();
         va32.start();
+
+        va12.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                callback.startFirstCircleAnimation(x2, y2);
+            }
+        });
+
+        va22.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                callback.startSecondCircleAnimation(x3, y3);
+            }
+        });
 
         va32.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -312,9 +430,9 @@ public class LineValueAnimator {
             }
         });
 
-        int tw11 = 416;
-        int tw21 = 133;
-        int tw31 = 500;
+        int tw11 = 450;
+        int tw21 = 143;
+        int tw31 = 510;
         va11.setDuration(tw11);
         va21.setDuration(tw21);
         va31.setDuration(tw31);
@@ -322,8 +440,8 @@ public class LineValueAnimator {
         va21.setStartDelay(tw11);
         va31.setStartDelay(tw11 + tw21);
 
-        int tw12 = 450;
-        int tw22 = 150;
+        int tw12 = 510;
+        int tw22 = 165;
         int tw32 = 433;
         va12.setDuration(tw12);
         va22.setDuration(tw22);
@@ -340,6 +458,23 @@ public class LineValueAnimator {
         va12.start();
         va22.start();
         va32.start();
+
+
+        va12.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                callback.startFirstCircleAnimation(x2, y2);
+            }
+        });
+
+        va22.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                callback.startSecondCircleAnimation(x3, y3);
+            }
+        });
 
         va32.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -427,9 +562,9 @@ public class LineValueAnimator {
         });
 
 
-        int tw11 = 416;
-        int tw21 = 133;
-        int tw31 = 500;
+        int tw11 = 450;
+        int tw21 = 143;
+        int tw31 = 510;
         va11.setDuration(tw11);
         va21.setDuration(tw21);
         va31.setDuration(tw31);
@@ -437,8 +572,8 @@ public class LineValueAnimator {
         va21.setStartDelay(tw11);
         va31.setStartDelay(tw11 + tw21);
 
-        int tw12 = 450;
-        int tw22 = 150;
+        int tw12 = 510;
+        int tw22 = 165;
         int tw32 = 433;
         va12.setDuration(tw12);
         va22.setDuration(tw22);
@@ -540,9 +675,9 @@ public class LineValueAnimator {
             }
         });
 
-        int tw11 = 416;
-        int tw21 = 133;
-        int tw31 = 500;
+        int tw11 = 450;
+        int tw21 = 143;
+        int tw31 = 510;
         va11.setDuration(tw11);
         va21.setDuration(tw21);
         va31.setDuration(tw31);
@@ -550,8 +685,8 @@ public class LineValueAnimator {
         va21.setStartDelay(tw11);
         va31.setStartDelay(tw11 + tw21);
 
-        int tw12 = 450;
-        int tw22 = 150;
+        int tw12 = 510;
+        int tw22 = 165;
         int tw32 = 433;
         va12.setDuration(tw12);
         va22.setDuration(tw22);
@@ -580,10 +715,18 @@ public class LineValueAnimator {
     private interface LocalCallback {
         void onValueUpdated();
 
+        void startFirstCircleAnimation(float x, float y);
+
+        void startSecondCircleAnimation(float x, float y);
+
         void onComplete();
     }
 
     public interface Callback {
         void onValueUpdated();
+
+        void startFirstCircleAnimation(float x, float y);
+
+        void startSecondCircleAnimation(float x, float y);
     }
 }

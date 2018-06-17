@@ -141,8 +141,8 @@ public class TheGlowingLoader extends FrameLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        lineAnimator.draw(canvas, paint);
         rippleAnimator1.draw(canvas, paint);
         rippleAnimator2.draw(canvas, paint);
+        lineAnimator.draw(canvas, paint);
     }
 }

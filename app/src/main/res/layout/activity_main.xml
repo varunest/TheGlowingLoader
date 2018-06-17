@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#040322"
+    android:background="#E8EAF6"
     tools:context="com.example.varun.MainActivity">
 
     <com.varunest.loader.TheGlowingLoader

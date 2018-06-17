@@ -146,9 +146,9 @@ public class RippleAnimator {
         startCircleMinor(callback);
         if (degree1 != Constants.INVALID_DEG)
             startParticleAnimation(degree1, PARTICLE_TYPE_TRIANGLE, configuration.getParticle1Color());
-        if(degree2 != Constants.INVALID_DEG)
+        if (degree2 != Constants.INVALID_DEG)
             startParticleAnimation(degree2, PARTICLE_TYPE_CIRCLE, configuration.getParticle2Color());
-        if(degree3 != Constants.INVALID_DEG)
+        if (degree3 != Constants.INVALID_DEG)
             startParticleAnimation(degree3, PARTICLE_TYPE_TRIANGLE, configuration.getParticle3Color());
     }
 
@@ -164,7 +164,7 @@ public class RippleAnimator {
         if (!configuration.isDisableShadows()) {
             paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
             paint.setStrokeWidth(.28f * circleRadius);
-            paint.setAlpha((int) (255 * circleAlpha * .4));
+            paint.setAlpha((int) (255 * circleAlpha * configuration.getShadowOpacity()));
             canvas.drawCircle(cX, cY + 100, circleRadius, paint);
         }
 

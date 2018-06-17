@@ -36,7 +36,7 @@ and then add dependency
 
 ```groovy
 dependencies {
-	        implementation 'com.github.varunest:TheGlowingLoader:1.0.3'
+	        implementation 'com.github.varunest:TheGlowingLoader:1.0.4'
 	}
 ```
 
@@ -64,6 +64,7 @@ dependencies {
         <attr name="theglowingloader_particle_3_color" format="reference" />
         <attr name="theglowingloader_disable_shadows" format="boolean" />
         <attr name="theglowingloader_disable_ripple" format="boolean" />
+	<attr name="theglowingloader_shadow_opacity" format="float" />
 ```
 
 You can also access and modify all these attributes at runtime by getting the reference of `TheGlowingLoader` and calling its `setConfiguration` method.

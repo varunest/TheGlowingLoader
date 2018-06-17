@@ -10,5 +10,6 @@
         <attr name="theglowingloader_particle_3_color" format="reference" />
         <attr name="theglowingloader_disable_shadows" format="boolean" />
         <attr name="theglowingloader_disable_ripple" format="boolean" />
+        <attr name="theglowingloader_shadow_opacity" format="float" />
     </declare-styleable>
 </resources>

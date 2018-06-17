@@ -16,6 +16,7 @@ public class Configuration {
     private int lineStrokeWidth;
     private boolean disableShadows;
     private boolean disableRipple;
+    private float shadowOpacity;
 
     Configuration() {
 
@@ -24,6 +25,7 @@ public class Configuration {
     public Configuration(Context context) {
         disableShadows = false;
         disableRipple = false;
+        shadowOpacity = .2f;
         line1Color = ContextCompat.getColor(context, R.color.white);
         line2Color = ContextCompat.getColor(context, R.color.red);
         lineStrokeWidth = Constants.DEF_LINE_STROKE_WIDTH;
@@ -103,5 +105,18 @@ public class Configuration {
 
     public void setDisableRipple(boolean disableRipple) {
         this.disableRipple = disableRipple;
+    }
+
+    public float getShadowOpacity() {
+        return shadowOpacity;
+    }
+
+    public void setShadowOpacity(float shadowOpacity) {
+        if (shadowOpacity < 0.0f) {
+            shadowOpacity = 0f;
+        } else if (shadowOpacity > 1f) {
+            shadowOpacity = 1f;
+        }
+        this.shadowOpacity = shadowOpacity;
     }
 }

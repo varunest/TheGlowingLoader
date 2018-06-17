@@ -81,7 +81,7 @@ public class LineAnimator {
             paint.setMaskFilter(new BlurMaskFilter(70, BlurMaskFilter.Blur.NORMAL));
             paint.setStrokeWidth(2.666f * configuration.getLineStrokeWidth());
             paint.setColor(configuration.getLine1Color());
-            paint.setAlpha(0x38);
+            paint.setAlpha((int) (255 * configuration.getShadowOpacity()));
             if (wxa11 != wxa12 && wya11 != wya12)
                 canvas.drawLine(wxa11, wya11 + 100, wxa12, wya12 + 100, paint);
             if (wxa21 != wxa22 && wya21 != wya22)
@@ -90,7 +90,7 @@ public class LineAnimator {
                 canvas.drawLine(wxa31, wya31 + 100, wxa32, wya32 + 100, paint);
 
             paint.setColor(configuration.getLine2Color());
-            paint.setAlpha(0x38);
+            paint.setAlpha((int) (255 * configuration.getShadowOpacity()));
             if (rxa11 != rxa12 && rya11 != rya12)
                 canvas.drawLine(rxa11, rya11 + 100, rxa12, rya12 + 100, paint);
             if (rxa21 != rxa22 && rya21 != rya22)

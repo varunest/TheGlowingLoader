@@ -1,4 +1,4 @@
-package com.varunest.loader;
+package com.varunest.loader.animators;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -11,6 +11,8 @@ import android.graphics.Paint;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+
+import com.varunest.loader.Configuration;
 
 public class LineAnimator {
     private View view;

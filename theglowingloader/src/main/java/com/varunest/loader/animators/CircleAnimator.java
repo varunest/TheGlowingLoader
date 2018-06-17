@@ -1,4 +1,4 @@
-package com.varunest.loader;
+package com.varunest.loader.animators;
 
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+
+import com.varunest.loader.Configuration;
 
 public class CircleAnimator {
     private float circleMaxRadius;
@@ -26,7 +28,7 @@ public class CircleAnimator {
     private float p3Radius, p3Alpha;
 
 
-    CircleAnimator(View v, Configuration configuration) {
+    public CircleAnimator(View v, Configuration configuration) {
         view = v;
         this.configuration = configuration;
     }
@@ -184,7 +186,7 @@ public class CircleAnimator {
 
         paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
 
-        paint.setStrokeWidth(.2285f * circleRadius);
+        paint.setStrokeWidth(.28f * circleRadius);
         paint.setAlpha((int) (255 * circleAlpha * .4));
         canvas.drawCircle(cX, cY + 100, circleRadius, paint);
 

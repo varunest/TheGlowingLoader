@@ -3,13 +3,14 @@ package com.varunest.loader;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.varunest.loader.animators.CircleAnimator;
+import com.varunest.loader.animators.LineAnimator;
 import com.varunest.theglowingloader.R;
 
 public class TheGlowingLoader extends View {

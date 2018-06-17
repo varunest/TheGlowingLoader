@@ -97,7 +97,7 @@ public class GlowingLoader extends View {
         x4 = .95f * w + offset / 2;
         y4 = h / 2 - .02f * w;
 
-        float circleMaxRadius = (x4 - x1) * .15f;
+        float circleMaxRadius = (x4 - x1) * .18f;
         circleAnimator2.setCircleMaxRadius(circleMaxRadius);
         circleAnimator1.setCircleMaxRadius(circleMaxRadius);
 

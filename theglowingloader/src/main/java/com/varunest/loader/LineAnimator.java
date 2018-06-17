@@ -76,10 +76,7 @@ public class LineAnimator {
 
 
         paint.setMaskFilter(new BlurMaskFilter(70, BlurMaskFilter.Blur.NORMAL));
-
-        //TODO: REmove hardcoded stroke value;
         paint.setStrokeWidth(2.666f * configuration.getLineStrokeWidth());
-
         paint.setColor(configuration.getLine1Color());
         paint.setAlpha(0x38);
         if (wxa11 != wxa12 && wya11 != wya12)

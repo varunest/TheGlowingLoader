@@ -126,9 +126,6 @@ public class TheGlowingLoader extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        canvas.drawLine(x1, y1, x2, y2, wp);
-//        canvas.drawLine(x2, y2, x3, y3, wp);
-//        canvas.drawLine(x3, y3, x4, y4, wp);
         lineAnimator.draw(canvas, paint);
         circleAnimator1.draw(canvas, paint);
         circleAnimator2.draw(canvas, paint);

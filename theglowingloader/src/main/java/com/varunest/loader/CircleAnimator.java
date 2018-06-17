@@ -76,7 +76,7 @@ public class CircleAnimator {
                 callback.onValueUpdated();
             }
         });
-        va2.setDuration(400);
+        va2.setDuration(380);
         va2.start();
     }
 
@@ -183,8 +183,8 @@ public class CircleAnimator {
         canvas.drawCircle(cX, cY, circleRadius, paint);
 
         paint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
-        // TODO: remove hardcoding of stroke width.
-        paint.setStrokeWidth(40);
+
+        paint.setStrokeWidth(.2285f * circleRadius);
         paint.setAlpha((int) (255 * circleAlpha * .4));
         canvas.drawCircle(cX, cY + 100, circleRadius, paint);
 

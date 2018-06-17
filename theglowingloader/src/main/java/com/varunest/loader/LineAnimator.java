@@ -1,4 +1,4 @@
-package com.example.varun.loader;
+package com.varunest.loader;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

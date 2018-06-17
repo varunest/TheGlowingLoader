@@ -1,47 +1,41 @@
-package com.example.varun.loader;
+package com.varunest.loader;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.PropertyValuesHolder;
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class GlowingLoader extends View {
+public class TheGlowingLoader extends View {
     private Paint paint;
     private LineAnimator lineAnimator;
     private CircleAnimator circleAnimator1, circleAnimator2;
 
-    public GlowingLoader(Context context) {
+    public TheGlowingLoader(Context context) {
         super(context);
         init();
     }
 
-    public GlowingLoader(Context context, @Nullable AttributeSet attrs) {
+    public TheGlowingLoader(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public GlowingLoader(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TheGlowingLoader(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    public GlowingLoader(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public TheGlowingLoader(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
 
     private void init() {
-        circleAnimator1 = new CircleAnimator(GlowingLoader.this);
-        circleAnimator2 = new CircleAnimator(GlowingLoader.this);
-        lineAnimator = new LineAnimator(GlowingLoader.this);
+        circleAnimator1 = new CircleAnimator(TheGlowingLoader.this);
+        circleAnimator2 = new CircleAnimator(TheGlowingLoader.this);
+        lineAnimator = new LineAnimator(TheGlowingLoader.this);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeCap(Paint.Cap.ROUND);
     }

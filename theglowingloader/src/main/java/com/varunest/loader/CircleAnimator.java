@@ -1,4 +1,4 @@
-package com.example.varun.loader;
+package com.varunest.loader;
 
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
@@ -8,10 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
-
-import com.example.varun.MainActivity;
 
 public class CircleAnimator {
     private float circleMaxRadius;

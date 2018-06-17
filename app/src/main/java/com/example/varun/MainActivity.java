@@ -3,7 +3,8 @@ package com.example.varun;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.varun.loader.R;
+import com.varunest.loader.R;
+
 
 public class MainActivity extends AppCompatActivity {
 

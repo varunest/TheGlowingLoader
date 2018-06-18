@@ -81,4 +81,4 @@ This library was a result of challenge hosted by [Uplabs](https://www.uplabs.com
 Any contributions, large or small,features, bug fixes are welcomed and appreciated. Use pull requests, they will be thoroughly reviewed and discussed.
 
 ## License
-Library falls under [Apache 2.0] (LICENSE.md)
+Library falls under [Apache 2.0](LICENSE.md)

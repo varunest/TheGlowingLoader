@@ -12,6 +12,7 @@ I have made it so that it can be easily customized. You can change line stroke w
 Library supports OS on API 14 and above.
 
 **[Download Demo Apk](demo/app-debug.apk)**
+
 **[Demo Video](https://www.youtube.com/watch?v=lSBTyfGWYAU)**
 
 #### Here is how the loader looks by default:

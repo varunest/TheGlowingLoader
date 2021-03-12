@@ -62,6 +62,7 @@ public class TheGlowingLoader extends FrameLayout {
 
     public void setConfiguration(Configuration configuration) {
         this.configuration = configuration;
+        init();
     }
 
     private void init() {

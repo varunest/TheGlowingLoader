@@ -9,3 +9,5 @@
 /captures
 .idea/*
 .externalNativeBuild
+app/.idea/
+app/local.properties

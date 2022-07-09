@@ -1,11 +1,13 @@
-apply plugin: 'com.android.application'
+plugins {
+  id 'com.android.application'
+}
 
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.varun.theglowingloader"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,5 +28,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':theglowingloader')
-//    implementation 'com.github.varunest:TheGlowingLoader:1.0.0'
+    // implementation 'com.github.varunest:TheGlowingLoader:1.0.6'
 }
